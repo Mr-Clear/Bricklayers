@@ -110,12 +110,12 @@ def process_gcode(input_file, layer_height, extrusion_multiplier):
                         logging.info(f"Multiplying E value by 0.5 on last layer (shifted block): {e_value:.5f} -> {new_e_value:.5f}")
                         line = re.sub(r'E[-\d.]+', f'E{new_e_value:.5f}', line).strip()
                         line += f" ; Adjusted E for last layer, block #{perimeter_block_count}\n"
-                    else: 
+                    else:
                         new_e_value = e_value * extrusion_multiplier
                         logging.info(f"Multiplying E value by extrusionMultiplier")
                         line = re.sub(r'E[-\d.]+', f'E{new_e_value:.5f}', line).strip()
                         line += f" ; Adjusted E for extrusionMultiplier, block #{perimeter_block_count}\n"
-						
+
         elif perimeter_type == "internal" and line.startswith("G1") and "X" in line and "Y" in line and "F" in line:  # End of perimeter block
             inside_perimeter_block = False
 
